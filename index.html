@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My DevOps Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>My First DevOps Project</h1>
+        <p>Built with HTML, CSS, Git, Jenkins and Docker</p>
+    </header>
+
+    <main class="card">
+        <h2>Welcome!</h2>
+        <p>This website is part of my beginner CI/CD project.</p>
+        <p>My goal is to automate building and deploying this website.</p>
+        <button onclick="showMessage()">Test Website</button>
+        <p id="message"></p>
+    </main>
+
+    <footer>
+        <p>DevOps Lab | Version 1.0</p>
+    </footer>
+
+    <script>
+        function showMessage() {
+            document.getElementById("message").textContent =
+                "Success! My website is working.";
+        }
+    </script>
+</body>
+</html>
