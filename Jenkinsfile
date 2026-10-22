@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Checkout Verification') {
             steps {
-                echo 'Checking out the DevOps website source code'
+                echo 'Checking DevOps website source code'
                 bat 'git --version'
                 bat 'dir'
             }
@@ -15,24 +15,26 @@ pipeline {
             steps {
                 bat 'if not exist index.html (echo ERROR: index.html missing & exit /b 1)'
                 bat 'if not exist style.css (echo ERROR: style.css missing & exit /b 1)'
-                echo 'Website files found successfully'
+                bat 'if not exist Dockerfile (echo ERROR: Dockerfile missing & exit /b 1)'
+                echo 'Website files and Dockerfile found'
             }
         }
 
-        stage('Build Summary') {
+        stage('Docker Environment Check') {
             steps {
-                echo 'Build completed successfully!'
-                echo 'Next step: deploy this website with Docker'
+                bat 'docker --version'
+                bat 'docker version'
+                bat 'docker info'
             }
         }
     }
 
     post {
         success {
-            echo 'CI Pipeline status: SUCCESS'
+            echo 'CI Pipeline and Docker environment check: SUCCESS'
         }
         failure {
-            echo 'CI Pipeline status: FAILURE - check Console Output'
+            echo 'Pipeline failed. Check Console Output for the first error.'
         }
     }
 }
