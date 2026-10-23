@@ -32,6 +32,13 @@ pipeline {
                 echo 'Deployment command completed. Open http://localhost:8081 to verify.'
             }
         }
+
+        stage('HTTP Health Check') {
+    	    steps {
+                bat 'curl --fail --silent --show-error --retry 5 --retry-delay 2 http://localhost:8081 -o NUL'
+                echo 'HTTP Health Check passed: Website returned a successful HTTP response.'
+            }
+        }
     }
 
     post {
