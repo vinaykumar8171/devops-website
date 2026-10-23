@@ -9,6 +9,11 @@ pipeline {
                 bat 'if not exist index.html (echo ERROR: index.html missing & exit /b 1)'
                 bat 'if not exist style.css (echo ERROR: style.css missing & exit /b 1)'
                 bat 'if not exist Dockerfile (echo ERROR: Dockerfile missing & exit /b 1)'
+
+		bat 'findstr /i /c:"<html" index.html >nul || (echo ERROR: HTML tag missing & exit /b 1)'
+		bat 'findstr /i /c:"<head" index.html >nul || (echo ERROR: HEAD tag missing & exit /b 1)'
+		bat 'findstr /i /c:"<body" index.html >nul || (echo ERROR: BODY tag missing & exit /b 1)'
+
                 echo 'Website files validated successfully'
             }
         }
