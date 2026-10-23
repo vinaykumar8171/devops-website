@@ -24,6 +24,13 @@ pipeline {
             }
         }
 
+	stage('Validate Docker Image') {
+    	    steps {
+        	bat 'docker image inspect devops-website:1.0 >nul 2>&1 || (echo ERROR: Docker image missing & exit /b 1)'
+        	echo 'Docker image validated successfully.'
+    	    }
+	}
+
         stage('Deploy Website') {
             steps {
                 bat 'docker rm -f devops-website-container 2>nul & exit /b 0'
