@@ -41,7 +41,8 @@ pipeline {
         stage('Verify Deployment') {
             steps {
                 bat 'docker ps --filter name=devops-website-container'
-                echo 'Deployment command completed. Open http://localhost:8081 to verify.'
+                bat 'docker inspect -f "{{.State.Running}}" devops-website-container | findstr /i "true" >nul || (echo ERROR: Container is not running & exit /b 1)'
+		echo 'Deployment verified: Container is running.'
             }
         }
 
