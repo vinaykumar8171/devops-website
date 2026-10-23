@@ -22,7 +22,7 @@ pipeline {
         stage('Deploy Website') {
             steps {
                 bat 'docker rm -f devops-website-container 2>nul & exit /b 0'
-                bat 'docker run -d --name devops-website-container -p 8081:80 devops-website:1.0'
+                bat 'docker run -d --restart unless-stopped --name devops-website-container -p 8081:80 devops-website:1.0'
             }
         }
 
